@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 RLHF PPO Training with Dual-Track Reward Model
 Combines Q2 model with safety-specific logic for comprehensive evaluation.
@@ -148,10 +147,10 @@ class DualTrackRewardModel:
 class SimpleLM(nn.Module):
     """Simple language model for PPO training"""
     
-    def __init__(self, vocab_size=50000, hidden_size=256, num_layers=2):
+    def __init__(self, vocab_size=50000, hidden_size=256, num_layers=2): # vocab_size is the number of unique tokens in the vocabulary, 
         super().__init__()
         self.embedding = nn.Embedding(vocab_size, hidden_size)
-        self.lstm = nn.LSTM(hidden_size, hidden_size, num_layers, batch_first=True)
+        self.lstm = nn.LSTM(hidden_size, hidden_size, num_layers, batch_first=True) # Remembers context (like human short-term memory)
         self.output = nn.Linear(hidden_size, vocab_size)
         self.value_head = nn.Linear(hidden_size, 1)  # For PPO value estimation
         
